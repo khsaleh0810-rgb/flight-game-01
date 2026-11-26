@@ -1,0 +1,69 @@
+/* Island Hopper — glass-cockpit HUD styling. All layout is pure CSS; the
+   game itself needs no images or fonts from the network. */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #0a1c2e; font-family: "Segoe UI", Verdana, Geneva, sans-serif; }
+#game-canvas { display: block; width: 100vw; height: 100vh; }
+
+#hud { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
+.panel {
+  position: absolute; top: 14px; padding: 10px 14px;
+  background: rgba(6, 24, 38, 0.62); border: 1px solid rgba(140, 220, 255, 0.45);
+  border-radius: 10px; color: #dff3ff;
+  box-shadow: 0 0 18px rgba(0, 180, 255, 0.25), inset 0 0 24px rgba(0, 140, 255, 0.12);
+  backdrop-filter: blur(2px);
+}
+#hud-left { left: 14px; width: 208px; }
+#hud-right { right: 14px; width: 220px; text-align: right; }
+.hud-row { display: flex; align-items: baseline; gap: 8px; line-height: 1.5; }
+#hud-right .hud-row { justify-content: flex-end; }
+.hud-label { font-size: 12px; letter-spacing: 2px; color: #8fd8ff; }
+.hud-value { font-size: 26px; font-weight: 700; color: #ffffff; text-shadow: 0 0 8px rgba(120, 210, 255, 0.8); font-variant-numeric: tabular-nums; }
+.hud-unit { font-size: 11px; color: #8fd8ff; }
+#hud-horizon { display: block; margin: 8px auto 4px; border-radius: 50%; border: 2px solid rgba(160, 225, 255, 0.6); box-shadow: 0 0 12px rgba(0, 180, 255, 0.35); }
+.bar { height: 8px; background: rgba(255, 255, 255, 0.15); border-radius: 4px; overflow: hidden; margin: 4px 0 6px; }
+.bar-fill { height: 100%; border-radius: 4px; transition: width 0.2s; }
+.bar-fill.fuel { background: linear-gradient(90deg, #2fd35a, #9be15d); }
+.bar-fill.fuel.low { background: linear-gradient(90deg, #ff5a3c, #ff9a3c); }
+.bar-fill.thr { background: linear-gradient(90deg, #1e90ff, #7fd4ff); }
+.hud-value.low, #hud-time.low { color: #ff8a6b; }
+.hud-next { margin-top: 6px; font-size: 11px; letter-spacing: 1px; color: #ffd23c; text-align: left; }
+#hud-message {
+  position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+  padding: 10px 22px; font-size: 20px; font-weight: 700; letter-spacing: 1px;
+  color: #fff7d0; background: rgba(6, 24, 38, 0.7); border: 1px solid rgba(255, 210, 60, 0.7);
+  border-radius: 8px; text-shadow: 0 0 10px rgba(255, 200, 40, 0.7); white-space: nowrap;
+}
+#hud-help {
+  position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+  font-size: 11px; letter-spacing: 1px; color: rgba(223, 243, 255, 0.75);
+  background: rgba(6, 24, 38, 0.5); padding: 5px 12px; border-radius: 6px; white-space: nowrap;
+}
+.hidden { display: none !important; }
+
+.screen {
+  position: fixed; inset: 0; z-index: 10; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  background: radial-gradient(ellipse at center, rgba(4, 20, 34, 0.25) 0%, rgba(4, 20, 34, 0.72) 100%);
+  color: #eaf7ff; padding: 20px;
+}
+.screen h1 {
+  margin: 0 0 8px; font-size: 64px; letter-spacing: 8px; font-weight: 800;
+  color: #ffd23c; text-shadow: 0 0 24px rgba(255, 190, 40, 0.65), 0 4px 0 rgba(0, 0, 0, 0.35);
+}
+.screen .subtitle { margin: 0 0 14px; font-size: 19px; color: #bfe8ff; }
+.screen .brief { max-width: 560px; font-size: 15px; line-height: 1.6; color: #d6efff; }
+.screen .controls { margin-top: 18px; font-size: 12px; letter-spacing: 1px; color: #9fc9e2; }
+.screen button {
+  pointer-events: auto; margin-top: 10px; padding: 14px 42px; font-size: 20px; font-weight: 700;
+  letter-spacing: 3px; color: #08222f; background: linear-gradient(180deg, #ffd23c, #ff9d1a);
+  border: none; border-radius: 10px; cursor: pointer;
+  box-shadow: 0 6px 0 #b96a00, 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+.screen button:hover { filter: brightness(1.08); }
+.screen button:active { transform: translateY(4px); box-shadow: 0 2px 0 #b96a00; }
+.end-lines { font-size: 18px; line-height: 1.8; margin-bottom: 8px; }
+.end-lines b { color: #ffd23c; }
+/* Staged title screenshot: title content rides to the top so the parked
+   plane on the runway shows in the lower half of the frame. */
+body.shot-start .screen { justify-content: flex-start; padding-top: 6vh; }
+body.shot-start .screen h1 { font-size: 52px; }

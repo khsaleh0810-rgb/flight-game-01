@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Island Hopper — fly the rings of Kaluna</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="game-canvas"></canvas>
+
+<div id="hud">
+  <div id="hud-left" class="panel">
+    <div class="hud-row"><span class="hud-label">ALT</span><span id="hud-alt" class="hud-value">00000</span><span class="hud-unit">FT</span></div>
+    <div class="hud-row"><span class="hud-label">SPD</span><span id="hud-spd" class="hud-value">000</span><span class="hud-unit">KT</span></div>
+    <div class="hud-row"><span class="hud-label">HDG</span><span id="hud-hdg" class="hud-value">090</span><span class="hud-unit">&deg;</span></div>
+    <canvas id="hud-horizon" width="110" height="110" title="Artificial horizon"></canvas>
+    <div class="hud-row"><span class="hud-label">FUEL</span><span id="hud-fuel" class="hud-value">100%</span></div>
+    <div class="bar"><div id="hud-fuelbar" class="bar-fill fuel"></div></div>
+  </div>
+
+  <div id="hud-right" class="panel">
+    <div class="hud-row"><span class="hud-label">SCORE</span><span id="hud-score" class="hud-value">0</span></div>
+    <div class="hud-row"><span class="hud-label">RINGS</span><span id="hud-rings" class="hud-value">0 / 6</span></div>
+    <div class="hud-row"><span class="hud-label">TIME</span><span id="hud-time" class="hud-value">05:00</span></div>
+    <div class="hud-row"><span class="hud-label">THR</span><span id="hud-thr" class="hud-value">0%</span></div>
+    <div class="bar"><div id="hud-thrbar" class="bar-fill thr"></div></div>
+    <div id="hud-nextring" class="hud-next">NEXT RING 1 — follow the gold gate</div>
+  </div>
+
+  <div id="hud-message" class="hidden"></div>
+  <div id="hud-help">Arrows / WASD fly &middot; SHIFT throttle up &middot; CTRL throttle down &middot; drag mouse to steer &middot; P pause &middot; R restart &middot; M mute</div>
+</div>
+
+<div id="screen-title" class="screen">
+  <h1>ISLAND HOPPER</h1>
+  <p class="subtitle">Fly the rings of Kaluna island — then land back on the strip.</p>
+  <p class="brief">Six gold rings hang over the island. Thread them all, watch your fuel,
+  and put the little yellow hopper down on the runway before the five-minute
+  clock runs out. A clean landing pays +250.</p>
+  <button id="btn-fly">TAKE OFF</button>
+  <p class="controls">Arrows / WASD — pitch &amp; roll &nbsp;&middot;&nbsp; SHIFT / CTRL — throttle &nbsp;&middot;&nbsp; Mouse drag — steer &nbsp;&middot;&nbsp; P — pause</p>
+</div>
+
+<div id="screen-pause" class="screen hidden">
+  <h1>PAUSED</h1>
+  <p class="subtitle">The hopper is holding station. Press P to keep flying.</p>
+  <button id="btn-restart">RESTART SORTIE</button>
+</div>
+
+<div id="screen-end" class="screen hidden">
+  <h1 id="end-title">SORTIE COMPLETE!</h1>
+  <div id="end-lines" class="end-lines"></div>
+  <button id="end-restart">FLY AGAIN (R)</button>
+</div>
+
+<script src="vendor/three.min.js"></script>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
